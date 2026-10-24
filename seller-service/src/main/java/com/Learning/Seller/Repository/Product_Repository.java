@@ -10,5 +10,6 @@ import java.util.List;
 public interface Product_Repository extends MongoRepository<Product_Entity, String> {
 
     // all products of one seller
+
     List<Product_Entity> findByUserid(String userid);
 }

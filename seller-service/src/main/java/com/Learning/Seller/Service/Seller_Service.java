@@ -67,11 +67,8 @@ public class Seller_Service {
             throw new NoSuchElementException("Seller not found: " + userid);
         }
 
-            if (productEntity.getPrice() <= 0) {
+            if (productEntity.getPrice() <= 0&&productEntity.getQuantity() < 0) {
             throw new IllegalArgumentException("Price must be greater than 0");
-        }
-        if (productEntity.getQuantity() < 0) {
-            throw new IllegalArgumentException("Quantity cannot be negative");
         }
 
         productEntity.setProductId(null);
@@ -120,7 +117,7 @@ public class Seller_Service {
             if (!productRepository.existsById(dto.getProductId())) {
                 throw new NoSuchElementException("Product not found: " + dto.getProductId());
             }
-            throw new IllegalArgumentException("Not enough stock for product: " + dto.getProductId());
+            throw new IllegalArgumentException("Not enough stock  for product: " + dto.getProductId());
         }
     }
 

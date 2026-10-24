@@ -23,7 +23,7 @@ public class Seller_controller {
     Seller_Service service;
     @Autowired
     AuthenticationManager authenticationManager;
-    // FIX: removed the stray @Autowired that was sitting above @PostMapping("/signup")
+    // removed the stray @Autowired that was sitting above @PostMapping("/signup")
 
     @PostMapping("/signup")
     public Seller_Entity signup(@RequestBody Seller_Entity sellerEntity) {
