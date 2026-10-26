@@ -37,7 +37,8 @@ public class Configurations {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/seller/**", "/error").permitAll()
+                        .requestMatchers("/seller/**")
+                        .permitAll()
                         .anyRequest().authenticated()
                 );
         return http.build();

@@ -71,10 +71,10 @@ public class Seller_Service {
             throw new IllegalArgumentException("Price must be greater than 0");
         }
 
-        productEntity.setProductId(null);
+        productEntity.setProductId(null);// it will set auto by mongo
         productEntity.setDate(LocalDate.now());
         productEntity.setUserid(userid);
-        return productRepository.save(productEntity);
+        return productRepository.save(productEntity); // other parameter is send by seller through json
     }
 
     // one product (used by User service for cart and Order service for checkout)
