@@ -26,12 +26,12 @@ import java.util.NoSuchElementException;
 public class Seller_Service {
 
     @Autowired
-     private Seller_Repository sellerRepository;
+    private Seller_Repository sellerRepository;
     @Autowired
-     private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-      private Profile_Repository profileRepository;
+    private Profile_Repository profileRepository;
     @Autowired
     private Product_Repository productRepository;
 
@@ -40,20 +40,20 @@ public class Seller_Service {
 
 
     public Seller_Entity saveSeller(Seller_Entity sellerEntity) {
-         if (sellerRepository.findByEmail(sellerEntity
-                                            .getEmail())
-                                              .isPresent()) {
-             throw new IllegalArgumentException("Email already registered");
+        if (sellerRepository.findByEmail(sellerEntity
+                        .getEmail())
+                .isPresent()) {
+            throw new IllegalArgumentException("Email already registered");
         }
         sellerEntity.setUserID(null);
         sellerEntity.setPassword(passwordEncoder
                 .encode(sellerEntity.getPassword()));
-          return sellerRepository.save(sellerEntity);
+        return sellerRepository.save(sellerEntity);
     }
 
     public Profile_Entity saveProfile (Profile_Entity profileEntity, String userid) {
-          Seller_Entity seller = sellerRepository.findById(userid)
-                  .orElseThrow(() -> new NoSuchElementException("Seller not found:" + userid));
+        Seller_Entity seller = sellerRepository.findById(userid)
+                .orElseThrow(() -> new NoSuchElementException("Seller not found:" + userid));
         profileEntity.setSellerEntity(seller);
         return profileRepository.save(profileEntity);
     }
@@ -67,7 +67,7 @@ public class Seller_Service {
             throw new NoSuchElementException("Seller not found: " + userid);
         }
 
-            if (productEntity.getPrice() <= 0&&productEntity.getQuantity() < 0) {
+        if (productEntity.getPrice() <= 0&&productEntity.getQuantity() < 0) {
             throw new IllegalArgumentException("Price must be greater than 0");
         }
 
@@ -85,7 +85,7 @@ public class Seller_Service {
     }
 
     public List<Product_DTO> showproduct(String show) {
-         List<Product_DTO> result = new ArrayList<>();
+        List<Product_DTO> result = new ArrayList<>();
         if (show.equalsIgnoreCase("show")) {
             for (Product_Entity p : productRepository.findAll()) {
                 result.add(toDto(p));
