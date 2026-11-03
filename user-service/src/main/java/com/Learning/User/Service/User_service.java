@@ -35,7 +35,8 @@ public class User_service {
             throw new IllegalArgumentException("Email already registered");
         }
         userEntity.setUserId(null);
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setPassword(passwordEncoder.
+                encode(userEntity.getPassword()));
         return userRepository.save(userEntity);
     }
 
@@ -61,7 +62,7 @@ public class User_service {
             throw new IllegalArgumentException("Quantity must be greater than 0");
         }
         if (!userRepository.existsById(req.getUserID())) {
-            throw new NoSuchElementException("User not found: " + req.getUserID());
+            throw new NoSuchElementException("User not found:" + req.getUserID());
         }
 
         // 1. get the latest price and stock from Seller service

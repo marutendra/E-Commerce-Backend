@@ -41,14 +41,14 @@ public class User_Controller {
     }
 
     @GetMapping("/mycart/{userid}")
-    public Cart_Entity getcart(@PathVariable String userid) {
-        return userService.getMyCart(userid);
+    public Cart_Entity getcart(@PathVariable String userId) {
+        return userService.getMyCart(userId);
     }
 
     // NEW
     @DeleteMapping("/cart/{userid}/item/{productId}")
-    public Cart_Entity removeItem(@PathVariable String userid, @PathVariable String productId) {
-        return userService.removeItem(userid, productId);
+    public Cart_Entity removeItem(@PathVariable String userId, @PathVariable String productId) {
+        return userService.removeItem(userId, productId);
     }
 
     // NEW: used by Order service after checkout
