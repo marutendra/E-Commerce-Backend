@@ -173,7 +173,7 @@ public class Order_Service {
                 sellerClient.restoreStock(stock);
             } catch (Exception ex) {
                 // worst case: stock stays reduced. Log it so it can be fixed by hand.
-                log.error("Could not restore stock for product {} (quantity {}): {}",
+                log.error("Could not restore the stock for product {} (quantity {}): {}",
                         stock.getProductId(), stock.getQuantity(), ex.getMessage());
             }
         }
@@ -182,10 +182,10 @@ public class Order_Service {
     // turns raw Feign errors into messages a customer can understand
     private RuntimeException translate(RuntimeException e, String productId) {
         if (e instanceof FeignException.NotFound) {
-            return new NoSuchElementException("A product in your cart no longer exists: " + productId);
+            return new NoSuchElementException("This product in your cart no longer exists: " + productId);
         }
         if (e instanceof FeignException.BadRequest) {
-            return new IllegalArgumentException("Not enough stock for product: " + productId);
+            return new IllegalArgumentException("Not enough stock for this product: " + productId);
         }
         return e;
     }
